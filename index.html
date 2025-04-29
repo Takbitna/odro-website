@@ -8,13 +8,16 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- 로딩 스크린 -->
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+
   <header class="site-header">
     <div class="container">
       <h1 class="logo">ODRO</h1>
       <nav class="nav">
-        <button class="nav-toggle" aria-label="메뉴 열기">
-          ☰
-        </button>
+        <button class="nav-toggle" aria-label="메뉴 열기">☰</button>
         <ul class="nav-list">
           <li><a href="#home">Home</a></li>
           <li><a href="#products">Products</a></li>
@@ -26,6 +29,7 @@
   </header>
 
   <main>
+    <!-- 메인 히어로 섹션 -->
     <section id="home" class="hero">
       <div class="container">
         <h2 class="hero-title">어디로든, ODRO</h2>
@@ -34,24 +38,32 @@
       </div>
     </section>
 
+    <!-- 제품 섹션 -->
     <section id="products" class="products">
       <div class="container">
         <h3>Products</h3>
         <div class="product-grid">
-          <!-- 예시 아이템 -->
           <div class="product-item">
             <img src="assets/shoe1.jpg" alt="ODRO Shoe 1">
-            <h4>Urban Explorer</h4>
+            <h4>Fluffy Runner</h4>
           </div>
           <div class="product-item">
             <img src="assets/shoe2.jpg" alt="ODRO Shoe 2">
-            <h4>Trail Blazer</h4>
+            <h4>Plastic Wave</h4>
           </div>
-          <!-- 필요 시 더 추가 -->
+          <div class="product-item">
+            <img src="assets/shoe3.jpg" alt="ODRO Shoe 3">
+            <h4>Blue Glide</h4>
+          </div>
+          <div class="product-item">
+            <img src="assets/shoe4.jpg" alt="ODRO Shoe 4">
+            <h4>Lime Lace</h4>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- 브랜드 소개 -->
     <section id="about" class="about">
       <div class="container">
         <h3>About ODRO</h3>
@@ -59,6 +71,7 @@
       </div>
     </section>
 
+    <!-- 연락처 -->
     <section id="contact" class="contact">
       <div class="container">
         <h3>Contact Us</h3>
