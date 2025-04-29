@@ -4,92 +4,101 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ODRO - 어디로든, ODRO</title>
+  <title>어디로든, ODRO</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- 로딩 스크린 -->
-  <div id="loader">
-    <div class="spinner"></div>
+  <!-- 랜딩 애니메이션 캔버스 -->
+  <canvas id="landingCanvas"></canvas>
+  <!-- 카트 아이콘 -->
+  <div id="cartIcon">
+    🛒<span id="cartCount">0</span>
   </div>
 
-  <header class="site-header">
-    <div class="container">
-      <h1 class="logo">ODRO</h1>
-      <nav class="nav">
-        <button class="nav-toggle" aria-label="메뉴 열기">☰</button>
-        <ul class="nav-list">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#products">Products</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <!-- 카트 패널 -->
+  <div id="cartPanel">
+    <h3>Your Cart</h3>
+    <ul id="cartItems"></ul>
+    <div class="cart-total">Total: ₩<span id="cartTotal">0</span></div>
+    <button id="checkoutBtn" class="btn">Checkout</button>
+    <button id="closeCart" class="btn">Close</button>
+  </div>
 
-  <main>
-    <!-- 메인 히어로 섹션 -->
-    <section id="home" class="hero">
+  <!-- 메인 컨텐츠 -->
+  <div id="mainContent">
+    <header class="site-header">
       <div class="container">
-        <h2 class="hero-title">어디로든, ODRO</h2>
-        <p class="hero-subtitle">자유로운 여정을 위한 신발을 만듭니다.</p>
-        <a href="#products" class="btn">Our Collection</a>
+        <h1 class="logo">어디로든, ODRO</h1>
+        <nav class="nav">
+          <ul class="nav-list">
+            <li><a href="#" data-target="home" class="nav-link active">Home</a></li>
+            <li><a href="#" data-target="products" class="nav-link">Products</a></li>
+            <li><a href="#" data-target="story" class="nav-link">Brand Story</a></li>
+            <li><a href="#" data-target="about" class="nav-link">About</a></li>
+            <li><a href="#" data-target="contact" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
       </div>
-    </section>
+    </header>
 
-    <!-- 제품 섹션 -->
-    <section id="products" class="products">
-      <div class="container">
-        <h3>Products</h3>
-        <div class="product-grid">
-          <div class="product-item">
-            <img src="assets/shoe1.jpg" alt="ODRO Shoe 1">
-            <h4>Fluffy Runner</h4>
-          </div>
-          <div class="product-item">
-            <img src="assets/shoe2.jpg" alt="ODRO Shoe 2">
-            <h4>Plastic Wave</h4>
-          </div>
-          <div class="product-item">
-            <img src="assets/shoe3.jpg" alt="ODRO Shoe 3">
-            <h4>Blue Glide</h4>
-          </div>
-          <div class="product-item">
-            <img src="assets/shoe4.jpg" alt="ODRO Shoe 4">
-            <h4>Lime Lace</h4>
+    <main>
+      <!-- Home -->
+      <section class="page active" id="page-home">
+        <div class="hero"><h2>어디로든, ODRO</h2></div>
+      </section>
+
+      <!-- Products -->
+      <section class="page" id="page-products">
+        <div class="container">
+          <h2 class="section-title">Products</h2>
+          <div class="product-grid">
+            <div class="product-item" data-name="Fluffy Runner" data-price="120000">
+              <img src="assets/shoe1.jpg" alt="Fluffy Runner">
+              <h4 class="product-name">Fluffy Runner</h4>
+              <button class="add-cart btn">Add to Cart</button>
+            </div>
+            <!-- 나머지 제품 동일 구조 -->
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- 브랜드 소개 -->
-    <section id="about" class="about">
+      <!-- Brand Story -->
+      <section class="page" id="page-story">
+        <div class="container story-container">
+          <h2 class="section-title">Brand Story</h2>
+          <p id="storyText" class="story-text">ODRO는 발걸음 하나하나에 새로운 모험과 감각을 불어넣습니다...</p>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section class="page" id="page-about">
+        <div class="container">
+          <h2 class="section-title">About ODRO</h2>
+          <p class="section-desc">ODRO는 어디든 떠날 수 있는 자유와 모험을 신발에 담아, 당신의 발걸음을 응원합니다.</p>
+          <img src="assets/brand.jpg" alt="ODRO Brand Identity" class="brand-image">
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section class="page" id="page-contact">
+        <div class="container">
+          <h2 class="section-title">Contact Us</h2>
+          <form class="contact-form">
+            <input type="text" placeholder="Name" required>
+            <input type="email" placeholder="Email" required>
+            <textarea rows="4" placeholder="Message"></textarea>
+            <button type="submit" class="btn">Send</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
       <div class="container">
-        <h3>About ODRO</h3>
-        <p>ODRO는 어디든 떠날 수 있는 자유와 모험을 신발에 담아, 당신의 발걸음을 응원합니다.</p>
+        <p class="footer-text">&copy; 2025 ODRO</p>
       </div>
-    </section>
-
-    <!-- 연락처 -->
-    <section id="contact" class="contact">
-      <div class="container">
-        <h3>Contact Us</h3>
-        <form action="#" class="contact-form">
-          <input type="text" name="name" placeholder="Name" required>
-          <input type="email" name="email" placeholder="Email" required>
-          <textarea name="message" rows="4" placeholder="Message"></textarea>
-          <button type="submit" class="btn">Send</button>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; 2025 ODRO. All Rights Reserved.</p>
-    </div>
-  </footer>
+    </footer>
+  </div>
 
   <script src="script.js"></script>
 </body>
