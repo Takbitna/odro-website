@@ -1,13 +1,6 @@
 // script.js
-// 로딩 스크린 숨기기
-document.addEventListener('DOMContentLoaded', function() {
-  const loader = document.getElementById('loader');
-  loader.classList.add('hidden');
-});
-
-// 모바일 메뉴 토글
-const navToggle = document.querySelector('.nav-toggle');
-const navList = document.querySelector('.nav-list');
-navToggle.addEventListener('click', () => {
-  navList.style.display = navList.style.display === 'flex' ? 'none' : 'flex';
-});
+(()=>{
+  const canvas=document.getElementById('landingCanvas'),ctx=canvas.getContext('2d');let w,h;const particles=[];const colors=['#FFFFFF','#39FF14','#0047AB'];function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;}window.addEventListener('resize',resize);resize();class Particle{constructor(x,y,vx,vy,size,color){this.x=x;this.y=y;this.vx=vx;this.vy=vy;this.size=size;this.color=color;this.alpha=1;}update(){this.x+=this.vx;this.y+=this.vy;this.alpha-=0.005;}draw(){ctx.globalAlpha=this.alpha;ctx.fillStyle=this.color;ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;}}function spawnWave(){for(let i=0;i<200;i++){const angle=Math.random()*Math.PI*2;const speed=Math.random()*2+0.5;const size=Math.random()*3+1;const color=colors[Math.floor(Math.random()*colors.length)];particles.push(new Particle(w/2,h/2,Math.cos(angle)*speed,Math.sin(angle)*speed,size,color));}}window.addEventListener('mousemove',e=>{for(let i=0;i<3;i++)particles.push(new Particle(e.clientX,e.clientY,(Math.random()-0.5)*1,(Math.random()-0.5)*1,Math.random()*3+1,colors[0]));});function animate(){ctx.fillStyle='rgba(0,0,0,0.1)';ctx.fillRect(0,0,w,h);particles.forEach((p,i)=>{p.update();p.draw();if(p.alpha<=0)particles.splice(i,1);});requestAnimationFrame(animate);}spawnWave();animate();setTimeout(()=>{canvas.style.display='none';document.getElementById('mainContent').style.display='block';document.body.style.overflow='auto';},5000);
+  document.querySelectorAll('.nav-link').forEach(link=>{link.addEventListener('click',e=>{e.preventDefault();document.querySelector('.nav-link.active').classList.remove('active');link.classList.add('active');document.querySelector('.page.active').classList.remove('active');document.getElementById('page-'+link.dataset.target).classList.add('active');});});
+  const cartIcon=document.getElementById('cartIcon'),cartPanel=document.getElementById('cartPanel'),closeCart=document.getElementById('closeCart'),cartCount=document.getElementById('cartCount'),cartItems=document.getElementById('cartItems'),cartTotal=document.getElementById('cartTotal'),checkoutBtn=document.getElementById('checkoutBtn');let cart=[];document.querySelectorAll('.add-cart').forEach(btn=>btn.addEventListener('click',()=>{const item=btn.parentElement;const name=item.dataset.name;const price=parseInt(item.dataset.price);cart.push({name,price});updateCart();cartPanel.classList.add('open');}));cartIcon.addEventListener('click',()=>cartPanel.classList.add('open'));closeCart.addEventListener('click',()=>cartPanel.classList.remove('open'));checkoutBtn.addEventListener('click',()=>alert('Proceed to payment (not implemented)'));function updateCart(){cartItems.innerHTML='';let total=0;cart.forEach((i,idx)=>{total+=i.price;const li=document.createElement('li');li.textContent=`${i.name} - ₩${i.price}`;cartItems.appendChild(li);});cartCount.textContent=cart.length;cartTotal.textContent=total;}
+})();
