@@ -1,0 +1,83 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ODRO - 어디로든, ODRO</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo">ODRO</h1>
+      <nav class="nav">
+        <button class="nav-toggle" aria-label="메뉴 열기">
+          ☰
+        </button>
+        <ul class="nav-list">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="container">
+        <h2 class="hero-title">어디로든, ODRO</h2>
+        <p class="hero-subtitle">자유로운 여정을 위한 신발을 만듭니다.</p>
+        <a href="#products" class="btn">Our Collection</a>
+      </div>
+    </section>
+
+    <section id="products" class="products">
+      <div class="container">
+        <h3>Products</h3>
+        <div class="product-grid">
+          <!-- 예시 아이템 -->
+          <div class="product-item">
+            <img src="assets/shoe1.jpg" alt="ODRO Shoe 1">
+            <h4>Urban Explorer</h4>
+          </div>
+          <div class="product-item">
+            <img src="assets/shoe2.jpg" alt="ODRO Shoe 2">
+            <h4>Trail Blazer</h4>
+          </div>
+          <!-- 필요 시 더 추가 -->
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="container">
+        <h3>About ODRO</h3>
+        <p>ODRO는 어디든 떠날 수 있는 자유와 모험을 신발에 담아, 당신의 발걸음을 응원합니다.</p>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container">
+        <h3>Contact Us</h3>
+        <form action="#" class="contact-form">
+          <input type="text" name="name" placeholder="Name" required>
+          <input type="email" name="email" placeholder="Email" required>
+          <textarea name="message" rows="4" placeholder="Message"></textarea>
+          <button type="submit" class="btn">Send</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 ODRO. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
