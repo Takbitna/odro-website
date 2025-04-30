@@ -1,4 +1,4 @@
-- index.html -->
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- 랜딩 애니메이션과 그리드 배경 -->
+  <!-- 랜딩 애니메이션 캔버스 및 그리드 -->
   <canvas id="landingCanvas"></canvas>
   <div id="gridOverlay"></div>
 
@@ -39,34 +39,55 @@
     </header>
 
     <main>
-      <!-- Home -->
       <section class="page active" id="page-home">
         <div class="hero"><h2>어디로든, ODRO</h2></div>
       </section>
-      <!-- Products -->
+
       <section class="page" id="page-products">
         <div class="container">
           <h2 class="section-title">Products</h2>
           <div class="product-grid">
-            <!-- 제품 항목들 -->
+            <div class="product-item" data-name="Fluffy Runner" data-price="120000">
+              <img src="assets/shoe1.jpg" alt="Fluffy Runner">
+              <h4 class="product-name">Fluffy Runner</h4>
+              <button class="add-cart btn">Add to Cart</button>
+            </div>
+            <div class="product-item" data-name="Plastic Wave" data-price="150000">
+              <img src="assets/shoe2.jpg" alt="Plastic Wave">
+              <h4 class="product-name">Plastic Wave</h4>
+              <button class="add-cart btn">Add to Cart</button>
+            </div>
+            <div class="product-item" data-name="Blue Glide" data-price="130000">
+              <img src="assets/shoe3.jpg" alt="Blue Glide">
+              <h4 class="product-name">Blue Glide</h4>
+              <button class="add-cart btn">Add to Cart</button>
+            </div>
+            <div class="product-item" data-name="Lime Lace" data-price="140000">
+              <img src="assets/shoe4.jpg" alt="Lime Lace">
+              <h4 class="product-name">Lime Lace</h4>
+              <button class="add-cart btn">Add to Cart</button>
+            </div>
           </div>
         </div>
       </section>
-      <!-- About -->
+
       <section class="page" id="page-about">
         <div class="container">
           <h2 class="section-title">About ODRO</h2>
           <div class="about-text">
-            <!-- 20줄 스토리 텍스트 유지 -->
+            <!-- 브랜드 스토리 텍스트 유지 -->
           </div>
         </div>
       </section>
-      <!-- Contact -->
+
       <section class="page" id="page-contact">
         <div class="container">
           <h2 class="section-title">Contact Us</h2>
           <form class="contact-form">
-            <!-- 폼 필드 -->
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <textarea name="message" rows="4" placeholder="Message"></textarea>
+            <button type="submit" class="btn">Send</button>
           </form>
         </div>
       </section>
