@@ -1,45 +1,54 @@
-// script.js
-(()=>{
-  const canvas=document.getElementById('landingCanvas'), ctx=canvas.getContext('2d'); let w,h; const particles=[];
-  function resize(){ w=canvas.width=window.innerWidth; h=canvas.height=window.innerHeight; }
-  window.addEventListener('resize', resize); resize();
-  class Particle{ constructor(x,y,vx,vy,size){ this.x=x; this.y=y; this.vx=vx; this.vy=vy; this.size=size; this.alpha=1; } update(){ this.x+=this.vx; this.y+=this.vy; this.alpha-=0.002; } draw(){ ctx.globalAlpha=this.alpha; ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill(); ctx.globalAlpha=1; }}
-  function spawnWave(){ const count=Math.floor(200*2/3); for(let i=0;i<count;i++){ const angle=Math.random()*Math.PI*2; const speed=Math.random()*1.5+0.3; const size=Math.random()*3+1; particles.push(new Particle(w/2,h/2,Math.cos(angle)*speed,Math.sin(angle)*speed,size)); }}
-  window.addEventListener('mousemove', e=>{ for(let i=0;i<2;i++){ particles.push(new Particle(e.clientX, e.clientY, (Math.random()-0.5)*0.6, (Math.random()-0.5)*0.6, Math.random()*3+1)); } });
-  function animate(){ ctx.fillStyle='rgba(0,0,0,0.05)'; ctx.fillRect(0,0,w,h); particles.forEach((p,i)=>{ p.update(); p.draw(); if(p.alpha<=0) particles.splice(i,1); }); requestAnimationFrame(animate); }
-  spawnWave(); animate();
+/* style.css */
+@import url('https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css');
+* { margin:0; padding:0; box-sizing:border-box; }
+html { overflow:auto; }
+body { overflow:hidden; width:100%; height:100%; font-family:Pretendard,sans-serif; background:#000; color:#fff; }
 
-  // 텍스트 시퀀스
-  setTimeout(()=>{
-    // 전체 텍스트
-    ctx.clearRect(0,0,w,h);
-    ctx.font='bold 80px Pretendard'; ctx.textAlign='center'; ctx.fillStyle='#fff'; ctx.fillText('Anywhere, ODR*', w/2, h/2);
-    // '*'만 남기기
-    setTimeout(()=>{
-      ctx.clearRect(0,0,w,h);
-      ctx.fillText('*', w/2, h/2);
-      // '*' 디졸브
-      setTimeout(()=>{ ctx.clearRect(0,0,w,h); }, 2000);
-    }, 2000);
-  }, 3000);
+#landingCanvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:100; }
+#gridOverlay { position:fixed; top:0; left:0; width:100%; height:100%;
+  background-image:
+    linear-gradient(#fff 0.5px, transparent 0.5px),
+    linear-gradient(90deg, #fff 0.5px, transparent 0.5px);
+  background-size:40px 40px;
+  opacity:1;
+  pointer-events:none;
+  z-index:101;
+}
 
-  // 1분 후 메인 컨텐츠 표시
-  function showMainContent(){ canvas.style.display='none'; document.getElementById('gridOverlay').style.display='none'; document.getElementById('mainContent').style.display='block'; document.body.style.overflow='auto'; }
-  setTimeout(showMainContent, 60000);
+#mainContent { display:none; overflow-y:auto; height:100%; background:#fff; color:#000; }
 
-  // 오류 발생 시 즉시 메인 표시
-  window.onerror = showMainContent;
+.site-header { position:sticky; top:0; background:#fff; border-bottom:1px solid #000; padding:1rem; z-index:400; }
+.container { width:90%; max-width:1200px; margin:0 auto; }
+.logo { font-size:1.5rem; font-weight:700; color:#000; }
 
-  // SPA 네비게이션
-  document.querySelectorAll('.nav-link').forEach(link=>link.addEventListener('click', e=>{
-    e.preventDefault(); document.querySelector('.nav-link.active').classList.remove('active'); link.classList.add('active'); document.querySelector('.page.active').classList.remove('active'); document.getElementById('page-'+link.dataset.target).classList.add('active');
-  }));
+.nav-list { list-style:none; display:flex; gap:1rem; }
+.nav-link { font-weight:500; color:#000; text-decoration:none; position:relative; padding-bottom:.25rem; }
+.nav-link.active::after { content:''; position:absolute; left:0; bottom:0; width:100%; height:2px; background:#0047AB; }
+.nav-link:hover { color:#0047AB; }
 
-  // 카트 로직
-  const cartIcon=document.getElementById('cartIcon'), cartPanel=document.getElementById('cartPanel'), closeCart=document.getElementById('closeCart'), cartCount=document.getElementById('cartCount'), cartItems=document.getElementById('cartItems'), cartTotal=document.getElementById('cartTotal'), checkoutBtn=document.getElementById('checkoutBtn'); let cart=[];
-  document.querySelectorAll('.add-cart').forEach(btn=>btn.addEventListener('click', ()=>{ const item=btn.parentElement; const name=item.dataset.name; const price=parseInt(item.dataset.price); cart.push({name,price}); updateCart(); cartPanel.classList.add('open'); }));
-  cartIcon.addEventListener('click', ()=>cartPanel.classList.add('open'));
-  closeCart.addEventListener('click', ()=>cartPanel.classList.remove('open'));
-  checkoutBtn.addEventListener('click', ()=>alert('Proceed to payment (not implemented)'));
-  function updateCart(){ cartItems.innerHTML=''; let total=0; cart.forEach(i=>{ total+=i.price; const li=document.createElement('li'); li.textContent=`${i.name} - ₩${i.price}`; cartItems.appendChild(li); }); cartCount.textContent=cart.length; cartTotal.textContent=total; }
-})();
+.section-title { font-size:2rem; font-weight:700; margin:2rem 0 1rem; border-bottom:1px solid #000; padding-bottom:.5rem; }
+
+.page { display:none; opacity:0; transition:opacity .5s ease; border-top:1px solid #000; }
+.page.active { display:block; opacity:1; }
+
+.hero { display:flex; justify-content:center; align-items:center; height:80vh; font-size:3rem; font-weight:700; color:#fff; border-bottom:1px solid #000; }
+
+.product-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:2rem; margin:2rem 0; }
+.product-item { background:#f5f5f5; padding:1rem; border:1px solid #000; text-align:center; }
+.product-item img { width:100%; height:auto; transition:transform .3s; }
+.product-item:hover img { transform: scale(1.1); }
+.product-name { font-size:1.1rem; font-weight:600; margin:0.5rem 0; }
+
+.about-text { padding:2rem; font-size:1rem; line-height:1.6; font-weight:400; color:#000; }
+
+.contact-form { display:flex; flex-direction:column; gap:1rem; max-width:400px; margin:2rem auto; }
+.contact-form input, .contact-form textarea { padding:.75em; border:1px solid #000; border-radius:0; font-weight:300; }
+
+.btn { padding:.75em 1.5em; border:2px solid #000; background:#fff; color:#000; border-radius:0; cursor:pointer; font-weight:600; transition:background .3s; }
+.btn:hover { background:#0047AB; color:#fff; }
+
+.site-footer { text-align:center; padding:2rem 0; background:#fff; color:#000; border-top:1px solid #000; }
+
+@media (max-width:768px) {
+  .nav-list { flex-direction:column; }
+}
